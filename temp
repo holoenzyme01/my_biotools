@@ -1,1 +1,0 @@
-fastp -i ${r1_files[$file_count]} -I ${r2_files[$file_count]} -o ${r1_files[$file_count]}.fastp.fastq.gz -O ./fastp_results/${r2_files[$file_count]}.fastp.fastq.gz -h ${r1_files[$file_count]}.fastp.html -j ${r1_files[$file_count]}.fastp.json
