@@ -27,10 +27,10 @@ fi
 # fastp质控结果输出
 mkdir ./fastp_results
 while [ $file_count -ge 0 ]; do
+    file_count=$((file_count - 1))
     echo "Now we are going to do the quality control for the fastq files: ${r1_files[$file_count]} and ${r2_files[$file_count]}."
     fastp -i ${r1_files[$file_count]} -I ${r2_files[$file_count]} -o ./fastp_results/${r1_files[$file_count]}.fastp.fastq.gz -O ./fastp_results/${r2_files[$file_count]}.fastp.fastq.gz -h ./fastp_results/${r1_files[$file_count]}.fastp.html -j ./fastp_results/${r1_files[$file_count]}.fastp.json
     wait
-    file_count=$((file_count - 1))
 done
 
 # 结束
