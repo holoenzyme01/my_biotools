@@ -19,10 +19,8 @@ done
 if [ ${#r1_files_1[@]} -eq ${#r2_files_1[@]} ]; then
     file_count=${#r1_files_1[@]}
     echo "The number of files in r1_files and r2_files is equal. The number of the file is: $file_count"
-    echo ""
 else
     echo "The number of files in r1_files and r2_files is not equal."
-    echo ""
     exit_flag = 1
 fi
 
@@ -44,7 +42,8 @@ done
 cd ..
 
 # 结束
-echo "The quality control for the fastq files is done. You can see the results in the ${pwd}/fastp_results folder."
+echo ""
+echo "The quality control for the fastq files is done. You can see the results in the ${files_path}/fastp_results folder."
 echo ""
 
 
@@ -54,7 +53,7 @@ mkdir ./alignment
 cd ./fastp_results
 files_path=$(pwd)
 r1_fastq_gz_files_2=$(ls $files_path/*.R1.fastp.fastq.gz | xargs -n1 basename | sort)
-r2_fastq_gz_files_2=$(ls $files_path/*.R1.fastp.fastq.gz | xargs -n1 basename | sort)
+r2_fastq_gz_files_2=$(ls $files_path/*.R2.fastp.fastq.gz | xargs -n1 basename | sort)
 
 r1_files_2=()
 r2_files_2=()
@@ -65,16 +64,18 @@ for file in $r2_fastq_gz_files_2; do
     r2_files_2+=("$file")
 done
 
-file_count_2=${#r1_files_2[@]}
-while [ $file_count_2 -ge 0 ]; do
-    file_count_2=$((file_count - 1))
-    echo ""
-    echo "Now we are going to align fastq files: ${r1_files_2[$file_count_2]} and ${r2_files_2[$file_count_2]}."
-    STAR --runMode alignReads --runThreadN 10 --readFilesCommand zcat --twopassMode Basic  --outSAMtype BAM SortedByCoordinate --outSAMunmapped None --genomeDir /path/to/STAR_index --quantMode GeneCounts --readFilesIn ${r1_files_2[$file_count_2]} ${r2_files_2[$file_count_2]} --outFileNamePrefix ./${r1_files_2[$file_count_2]} --outFilterMismatchNmax 999 --outFilterMismatchNoverLmax 0.04 --outFilterType BySJout --alignSJoverhangMin 8 --alignSJDBoverhangMin 1
-    wait
-done
 cd ..
 
+file_count_2=${#r1_files_2[@]}
+while [ $file_count_2 -ge 0 ]; do
+    file_count_2=$((file_count_2 - 1))
+    echo ""
+    echo "Now we are going to align fastq files: ${r1_files_2[$file_count_2]} and ${r2_files_2[$file_count_2]}."
+    mkdir ./alignment/${r1_files_2[$file_count_2]}
+    STAR --runMode alignReads --runThreadN 10 --readFilesCommand zcat --twopassMode Basic  --outSAMtype BAM SortedByCoordinate --outSAMunmapped None --genomeDir /data3/lwd/GENOME_REF/FRUIT_FLY/dmel_r6.56/genome_indices --quantMode GeneCounts --readFilesIn ${r1_files_2[$file_count_2]} ${r2_files_2[$file_count_2]} --outFileNamePrefix ./aligment/${r1_files_2[$file_count_2]} --outFilterMismatchNmax 999 --outFilterMismatchNoverLmax 0.04 --outFilterType BySJout --alignSJoverhangMin 8 --alignSJDBoverhangMin 1
+    wait
+done
+
 # 结束
-echo "The alignment for the fastq files is done. You can see the results in the ${pwd}/alignment folder."
+echo "The alignment for the fastq files is done. You can see the results in the ${files_path}/alignment folder."
 echo ""
