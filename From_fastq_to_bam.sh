@@ -76,7 +76,7 @@ done
 
 cd ../alignment
 
-# 转移bam文件至bam文件夹中
+# 第三步，转移bam文件至bam文件夹中
 folders=()
 for dir in */; do
     folders+=("${dir%/}")
@@ -93,6 +93,7 @@ while [ $folder_count -ge 0 ]; do
     cd ..
     wait
 done
+echo "The bam files have been transferred to the /bam folder."
 
 
 # 结束

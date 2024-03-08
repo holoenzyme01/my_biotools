@@ -1,5 +1,28 @@
 个人使用，小小小代码量，低低低coding水平
 
+# 2024.03.08更新
+完成了从fastq.gz到bam的全流程自动化，脚本为From_fastq_to_bam.sh
+其中，fastp参数为：
+- -w 16
+STAR参数为：
+- --runMode alignReads
+- --runThreadN 16
+- --readFilesCommand zcat
+- --twopassMode Basic
+- --outSAMtype BAM SortedByCoordinate
+- --outSAMunmapped None
+- --outFilterMismatchNmax 999
+- --outFilterMismatchNoverLmax 0.04 
+- --outFilterType BySJout
+- --alignSJoverhangMin 8
+- --alignSJDBoverhangMin 1
+
+运行结束后fastp结果在/fastp_results中，STAR比对文件在/alignment中，STAR比对的bam结果在/bam中
+
+整个流程听取了hqw，lsb和lam师兄的建议，也参考了互联网的内容，还有copilot的代码参考（太好用了真的）
+STAR参数参考了hqw师兄的建议
+在此表示万分感谢 :)
+
 # 2024.03.07更新
 对于文件夹内的转录组数据，使用fastp进行质检
 质检后进行STAR比对
