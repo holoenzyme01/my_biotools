@@ -69,11 +69,32 @@ while [ $file_count_2 -ge 0 ]; do
     file_count_2=$((file_count_2 - 1))
     echo ""
     echo "Now we are going to align fastq files: ${r1_files_2[$file_count_2]} and ${r2_files_2[$file_count_2]}."
-    mkdir -p ../alignment/${r1_files_2[$file_count_2]}/${r2_files_2[$file_count_2]}
-    STAR --runMode alignReads --runThreadN 16 --readFilesCommand zcat --twopassMode Basic  --outSAMtype BAM SortedByCoordinate --outSAMunmapped None --genomeDir /data3/lwd/GENOME_REF/FRUIT_FLY/dmel_r6.56/genome_indices --quantMode GeneCounts --readFilesIn ${r1_files_2[$file_count_2]} ${r2_files_2[$file_count_2]} --outFileNamePrefix ../alignment/${r1_files_2[$file_count_2]}/${r2_files_2[$file_count_2]} --outFilterMismatchNmax 999 --outFilterMismatchNoverLmax 0.04 --outFilterType BySJout --alignSJoverhangMin 8 --alignSJDBoverhangMin 1
+    mkdir -p ../alignment/${r1_files_2[$file_count_2]}/${r1_files_2[$file_count_2]}
+    STAR --runMode alignReads --runThreadN 16 --readFilesCommand zcat --twopassMode Basic  --outSAMtype BAM SortedByCoordinate --outSAMunmapped None --genomeDir /data3/lwd/GENOME_REF/FRUIT_FLY/dmel_r6.56/genome_indices --quantMode GeneCounts --readFilesIn ${r1_files_2[$file_count_2]} ${r2_files_2[$file_count_2]} --outFileNamePrefix ../alignment/${r1_files_2[$file_count_2]}/${r1_files_2[$file_count_2]} --outFilterMismatchNmax 999 --outFilterMismatchNoverLmax 0.04 --outFilterType BySJout --alignSJoverhangMin 8 --alignSJDBoverhangMin 1
     wait
 done
 
+cd ../alignment
+
+# 转移bam文件至bam文件夹中
+folders=()
+for dir in */; do
+    folders+=("${dir%/}")
+done
+folder_count=${#folders[@]}
+echo "Now you have $folder_count bam files to be transferred."
+
+while [ $folder_count -ge 0 ]; do
+    folder_count=$((folder_count - 1))
+    echo ""
+    echo "We have ${folder_count} bam files need to transfer. Now we are going to transfer the bam file: ${folders[$folder_count]}."
+    cd ${folders[$folder_count]}
+    cp ${folders[$folder_count]}Aligned.sortedByCoord.out.bam ../../bam
+    cd ..
+    wait
+done
+
+
 # 结束
-echo "The alignment for the fastq files is done. You can see the results in the ${files_path}/alignment folder."
 echo ""
+echo "The alignment for the fastq files is done. You can see the results in the /alignment folder, and bam files in the /bam folder. :)"
