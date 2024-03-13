@@ -5,12 +5,11 @@ dds <- DESeqDataSetFromMatrix(countData_F, colData, design = ~ conditions)
 dds <- DESeq(dds)
 res <- results(dds)
 
-diff.table <- subset(res, padj <= 0.05)
+diff.table <- subset(res, padj <= 0.05 & abs(log2FoldChange) >= 1)
 write.table(diff.table,"WT_VS_KO", sep='\t', row.names = T, quote = F)
 diff_exp <- read.table("WT_VS_KO", sep='\t', header = T,row.names = 1)
 diff_exp <- diff_exp[,c(2,5)]
 diff_exp <- mutate(diff_exp, log10pvalue = log10(diff_exp$pvalue))
-diff_exp$change <- ifelse(diff_exp$log2FoldChange > 1, "up", ifelse(diff_exp$log2FoldChange < -1, "down", "stable"))
 
 up.table <- subset(res, padj <= 0.05 & log2FoldChange >= 1)
 write.table(up.table,"WT_VS_KO_up", sep='\t', row.names = T, quote = F)
@@ -25,7 +24,9 @@ down_exp <- down_exp[,c(2,5)]
 down_exp <- mutate(down_exp, log10pvalue = log10(down_exp$pvalue))
 
 print(paste('差异基因数量: ', nrow(diff.table)))
-print(paste('显著差异上调基因数量: ', nrow(up.table) + nrow(down.table)))
-print(paste('显著差异上调基因数量: ', nrow(up.table)))
-print(paste('显著差异下调基因数量: ', nrow(down.table)))
+print(paste('差异上调基因数量: ', nrow(up.table)))
+print(paste('差异下调基因数量: ', nrow(down.table)))
 
+
+diff_exp$change <- ifelse(diff_exp$log2FoldChange > 1, "up",
+                          ifelse(diff_exp$log2FoldChange < -1, "down", "stable"))
