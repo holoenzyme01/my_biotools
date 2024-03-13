@@ -1,0 +1,10 @@
+countData_F <- read.csv("countData.csv", row.names = 1)
+condition <- factor(c(rep("WT",3),rep("KO",3)),levels = c("WT","KO"))
+colData <- data.frame(row.names = colnames(countData_F),conditions=condition)
+dds <- DESeqDataSetFromMatrix(countData_F, colData, design = ~ conditions)
+dds <- DESeq(dds)
+res <- results(dds)
+diff.table <- subset(res, padj <= 0.05 & abs(log2FoldChange) >= 1)
+write.table(diff.table,"WT_VS_KO", sep='\t', row.names = T, quote = F)
+GEM2 <- read.table("WT_VS_KO", sep='\t', header = T,row.names = 1)
+GEM2

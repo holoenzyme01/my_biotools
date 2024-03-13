@@ -95,6 +95,11 @@ while [ $folder_count -ge 0 ]; do
 done
 echo "The bam files have been transferred to the /bam folder."
 
+# 使用featureCounts进行基因计数
+nohup featureCounts -T 16 -p -t exon -g gene_id -a /data3/lwd/GENOME_REF/FRUIT_FLY/dmel_r6.56/dmel-all-r6.56.gtf -o all-1.txt A-1_L2_UDI012.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam A-2_L2_UDI013.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam A-3_L2_UDI014.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam B-1_L2_UDI296.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam B-2_L2_UDI016.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam B-3_L2_UDI017.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam C-1_L2_UDI018.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam C-2_L2_UDI019.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam C-3_L2_UDI020.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam D-1_L2_UDI021.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam D-2_L2_UDI022.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam D-3_L2_UDI023.R1.fastp.fastq.gzAligned.sortedByCoord.out.bam > featurecount.out &
+cut -f 1,7,8,9,10,11,12,13,14,15,16,17,18 all.txt | grep -v '^#' >feacturCounts.txt
+sed 's/ /,/g' all-1.txt > all1.txt
+
 
 # 结束
 echo ""

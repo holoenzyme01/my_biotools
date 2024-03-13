@@ -1,5 +1,12 @@
 个人使用，小小小代码量，低低低coding水平
 
+# 2024.03.13更新
+完成了（没有）从bam获得表达矩阵，将脚本从From_fastq_to_bam.sh更改为From_fastq_to_exp_martix.sh
+使用featureCounts获得表达矩阵，参数为默认参数
+只是添加了命令内容，并不能自动化完成
+另外，添加了DESeq2的脚本命令，也不能自动化
+先做个保存，具体实现就后面再说
+
 # 2024.03.08更新
 完成了从fastq.gz到bam的全流程自动化，脚本为From_fastq_to_bam.sh
 其中，fastp参数为：
