@@ -3,7 +3,7 @@
 files_path=$(pwd)
 files=$(ls $files_path)
 
-echo "Clean principle: 1.FDR>=0.05; 2.From one sample, the reads must >=5"
+echo "Clean principle: 1.FDR>=0.05"
 
 for file in $files
 do
