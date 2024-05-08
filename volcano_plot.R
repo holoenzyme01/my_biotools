@@ -1,3 +1,4 @@
+
 ggplot(diff_exp, aes(x = log2FoldChange, y = -log10pvalue, colour = change)) +
   geom_point(alpha=0.7, size = 1) +
   scale_color_manual(values=c("blue", "gray","red")) + 

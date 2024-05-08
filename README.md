@@ -1,5 +1,9 @@
 个人使用，小小小代码量，低低低coding水平
 
+# 2024.05.08
+突然打开看了看，把绘制表达矩阵和GO富集分析的内容加上去了
+此处感谢互联网，gpt以及sbz提供的指导
+
 # 2024.03.13更新
 完成了（没有）从bam获得表达矩阵，将脚本从From_fastq_to_bam.sh更改为From_fastq_to_exp_martix.sh
 使用featureCounts获得表达矩阵，参数为默认参数
