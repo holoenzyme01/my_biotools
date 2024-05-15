@@ -1,4 +1,11 @@
 个人使用，小小小代码量，低低低coding水平
+目前的功能
+1. rMATs_visualize (基本完成)
+2. GO anlysis (基本完成)
+3. Extract specific sequence from genome based on gtf file
+
+# 2024.05.18
+觉得仅仅是rMATs的可视化分析内容有些太少了，准备把整个项目进行修改，最终的目标是锁定在自己在日常使用的生信代码上面
 
 # 2024.05.08
 突然打开看了看，把绘制表达矩阵和GO富集分析的内容加上去了
