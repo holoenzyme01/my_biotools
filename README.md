@@ -2,7 +2,7 @@
 目前的功能
 1. rMATs_visualize (基本完成)
 2. GO anlysis (基本完成)
-3. Extract specific sequence from genome based on gtf file
+3. Extract specific sequence from genome based on gtf file (正在进行)
 
 # 2024.05.18
 觉得仅仅是rMATs的可视化分析内容有些太少了，准备把整个项目进行修改，最终的目标是锁定在自己在日常使用的生信代码上面
