@@ -1,3 +1,7 @@
+library(dplyr)
+library(readr)
+library(tidyverse)
+
 # 基础设置
 folder_path <- read_file("./path.txt")
 count_tables_file_Names <- list.files(folder_path)

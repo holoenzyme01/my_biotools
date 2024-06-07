@@ -23,6 +23,13 @@ done
 
 echo "All the spacer counts have been calculated, and move to the ./count_table folder!"
 
-# 将count_table.csv文件合并
+# 第二步，将count_table.csv文件合并
 # 由于Genome-scale CRISPR-Cas9 knockout and transcriptional activation screening文章中的Step 65-69中的“RIGER is launched through GENE-E”中的GENE-E软件无法下载，
 #   所以这里只是将count_table.csv文件合并，后续的分析在MAGeCK中进行
+# 实验室内的服务器R环境版本较低，有些包安装不了，所以这里得手动操作，后续的分析在MAGeCK中进行即可
+
+# Rscript -slave CRISPR-KO.R
+# echo "All the count_table.csv files have been merged, and the final file is count_table.csv in ./count_table folder!"
+
+# 第三步，使用MAGeCK进行分析
+
