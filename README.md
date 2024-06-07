@@ -2,7 +2,11 @@
 目前的功能
 1. rMATs_visualize (基本完成)
 2. GO anlysis (基本完成)
-3. Extract specific sequence from genome based on gtf file (正在进行)
+3. Extract specific sequence from genome based on gtf file (基本完成)
+4. CRISPR-Knockout screen的数据处理（正在进行）
+
+# 2024.6.7
+前几天根据xyl师兄给的数据，完成了对于CRISPR-Knockout screen数据的前期处理任务，后面使用MAGeCK的分析将继续写下去
 
 # 2024.05.18
 觉得仅仅是rMATs的可视化分析内容有些太少了，准备把整个项目进行修改，最终的目标是锁定在自己在日常使用的生信代码上面
@@ -20,21 +24,6 @@
 
 # 2024.03.08更新
 完成了从fastq.gz到bam的全流程自动化，脚本为From_fastq_to_bam.sh
-其中，fastp参数为：
-- -w 16
-STAR参数为：
-- --runMode alignReads
-- --runThreadN 16
-- --readFilesCommand zcat
-- --twopassMode Basic
-- --outSAMtype BAM SortedByCoordinate
-- --outSAMunmapped None
-- --outFilterMismatchNmax 999
-- --outFilterMismatchNoverLmax 0.04 
-- --outFilterType BySJout
-- --alignSJoverhangMin 8
-- --alignSJDBoverhangMin 1
-
 运行结束后fastp结果在/fastp_results中，STAR比对文件在/alignment中，STAR比对的bam结果在/bam中
 
 整个流程听取了hqw，lsb和lam师兄的建议，也参考了互联网的内容，还有copilot的代码参考（太好用了真的）

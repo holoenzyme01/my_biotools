@@ -8,6 +8,4 @@ cat Saccharomyces_cerevisiae.R64-1-1.59.gtf | awk 'BEGIN{FS=OFS="\t"} $3=="gene"
 # 提取intron
 bedtools subtract -a SC.gene.bedtools.merge.bed -b SC.exon.bedtools.merge.bed | sort -k1,1 -k2,2n  > SC.intron.bed
 
-
-
- cat saccharomyces_cerevisiae_R64-4-1_20230830.gff | grep -v 'Uncharacterized' | awk 'BEGIN{OFS=FS="\t"} $3=="intron" && $1!="chrmt" {print $1,$4-1,$5}' |wc -l
+cat saccharomyces_cerevisiae_R64-4-1_20230830.gff | grep -v 'Uncharacterized' | awk 'BEGIN{OFS=FS="\t"} $3=="intron" && $1!="chrmt" {print $1,$4-1,$5}' |wc -l
