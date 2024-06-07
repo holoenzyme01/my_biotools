@@ -15,12 +15,14 @@ echo "All the files have been unzipped!"
 # 第一步，根据count_spacers.py文件统计spacer序列counts
 
 fastq_files=$(ls $files_path/*R1.fastq | xargs -n1 basename | sort)
-mkdir ./output
+mkdir ./count_table
 for file in $fastq_files; do
     python count_spacers.py -f $file -o ${file}.out.csv -i lib_ab.csv
-    mv ${file}.out.csv ./output
+    mv ${file}.out.csv ./count_table
 done
 
-echo "All the spacer counts have been calculated, and move to the output folder!"
+echo "All the spacer counts have been calculated, and move to the ./count_table folder!"
 
-
+# 将count_table.csv文件合并
+# 由于Genome-scale CRISPR-Cas9 knockout and transcriptional activation screening文章中的Step 65-69中的“RIGER is launched through GENE-E”中的GENE-E软件无法下载，
+#   所以这里只是将count_table.csv文件合并，后续的分析在MAGeCK中进行
