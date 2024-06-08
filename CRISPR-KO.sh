@@ -32,4 +32,4 @@ echo "All the spacer counts have been calculated, and move to the ./count_table 
 # echo "All the count_table.csv files have been merged, and the final file is count_table.csv in ./count_table folder!"
 
 # 第三步，使用MAGeCK进行分析
-
+mageck test -k sample.txt -t HL60.final,KBM7.final -c HL60.initial,KBM7.initial  -n demo
