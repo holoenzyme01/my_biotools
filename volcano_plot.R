@@ -1,3 +1,4 @@
+library("ggplot2")
 
 ggplot(diff_exp, aes(x = log2FoldChange, y = -log10pvalue, colour = change)) +
   geom_point(alpha=0.7, size = 1) +
@@ -10,6 +11,3 @@ ggplot(diff_exp, aes(x = log2FoldChange, y = -log10pvalue, colour = change)) +
   theme(plot.title = element_text(hjust = 0.5), 
         legend.position="right",
         legend.title = element_blank())
-
-  
-

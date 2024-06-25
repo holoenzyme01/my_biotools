@@ -1,6 +1,10 @@
 #!/bin/bash
  
-$genome_path = "/data3/lwd/GENOME_REF/FRUIT_FLY/dmel_r6.56/genome_indices"
+genome_path = "/data3/lwd/GENOME_REF/FRUIT_FLY/dmel_r6.56/genome_indices"
+
+# 针对双端测序文件进行的比较
+
+
 
 # 第一步，选取文件夹中的gz文件
 files_path=$(pwd)
